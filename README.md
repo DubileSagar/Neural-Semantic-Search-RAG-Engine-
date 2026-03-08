@@ -96,7 +96,46 @@ trademarkia/
     ├── chroma.sqlite3           # ChromaDB persistent store
     └── clustering.pkl           # PCA model + FCM centroids + memberships
 ```
+## 🔍 Demo Query Walkthrough
 
+---
+
+### 📦 Cluster 0 — GPU / Hardware Topic
+
+All these queries land in **Cluster 0**. Only 1 cache entry is created — every rephrase hits it.
+
+| # | Query | Cache | Similarity | Note |
+|---|-------|-------|------------|------|
+| 1 | `best graphics card for gaming` | 🔴 MISS | Cache empty, entry created in Cluster 0 |
+| 2 | `best graphics card for gaming` | 🟢 HIT | Exact repeat |
+| 3 | `top GPU recommendations for PC games` | 🟢 HIT | Different words, same meaning |
+| 4 | `which GPU should I buy under $500` | 🟢 HIT | More specific, still hits |
+| 5 | `best video card for high fps gaming` | 🟢 HIT | All 5 words different — still hits |
+
+> 1 cache entry served 4 hits. Every GPU-buying rephrase collapsed onto the same stored result.
+
+---
+
+### 🌌 Cluster 9 — Space / Science Topic (completely different)
+
+| # | Query | Cache | Similarity | Note |
+|---|-------|-------|------------|------|
+| 6 | `NASA Mars mission and space exploration` | 🔴 MISS | — | New topic → new cluster, new entry created |
+| 7 | `latest updates on Mars rover` | 🟢 HIT | Hits Cluster 9 — Cluster 0 never touched |
+
+> The cache now has 2 entries across 2 clusters. Each query only searches its own cluster bucket.
+
+---
+
+### 📊 Final Stats
+```json
+{
+  "total_entries": 2,
+  "hit_count": 5,
+  "miss_count": 2,
+  "hit_rate": 0.714
+}
+```
 ---
 
 ## Quick Start
