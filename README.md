@@ -35,7 +35,6 @@ Query → Embed (MiniLM) → Fuzzy Membership → Cache Lookup
 
 ## Design Decisions
 
-> *"Your design decisions and how you justify them matter as much as the code."*
 
 ### Why `all-MiniLM-L6-v2` over larger models?
 It's purpose-built for semantic similarity (our exact task). 384 dims instead of 768 or 1536 means the cosine similarity calculations inside the cache are 2-4x faster. For a corpus of 18k newsgroup posts, the quality difference vs `all-mpnet-base-v2` is negligible.
