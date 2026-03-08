@@ -103,8 +103,8 @@ trademarkia/
 
 All these queries land in **Cluster 0**. Only 1 cache entry is created — every rephrase hits it.
 
-| # | Query | Cache | Similarity | Note |
-|---|-------|-------|------------|------|
+| # | Query | Cache | Note |
+|---|-------|-------|------|
 | 1 | `best graphics card for gaming` | 🔴 MISS | Cache empty, entry created in Cluster 0 |
 | 2 | `best graphics card for gaming` | 🟢 HIT | Exact repeat |
 | 3 | `top GPU recommendations for PC games` | 🟢 HIT | Different words, same meaning |
@@ -117,9 +117,9 @@ All these queries land in **Cluster 0**. Only 1 cache entry is created — every
 
 ### 🌌 Cluster 9 — Space / Science Topic (completely different)
 
-| # | Query | Cache | Similarity | Note |
-|---|-------|-------|------------|------|
-| 6 | `NASA Mars mission and space exploration` | 🔴 MISS | — | New topic → new cluster, new entry created |
+| # | Query | Cache | Note |
+|---|-------|-------|------|
+| 6 | `NASA Mars mission and space exploration` | 🔴 MISS | New topic → new cluster, new entry created |
 | 7 | `latest updates on Mars rover` | 🟢 HIT | Hits Cluster 9 — Cluster 0 never touched |
 
 > The cache now has 2 entries across 2 clusters. Each query only searches its own cluster bucket.
