@@ -1,4 +1,4 @@
-# Trademarkia Neural Search Engine
+# Neural Semantic Search / RAG Engine 
 
 > Semantic search over the 20 Newsgroups dataset with fuzzy clustering, a first-principles cache layer, and a live FastAPI service — built for the Trademarkia AI/ML Engineer assignment.
 
